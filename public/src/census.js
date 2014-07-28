@@ -71,7 +71,7 @@ $(document).ready(function($) {
       sortTable(table, sortBy);
     });
 
-    $('a[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="tooltip"]').tooltip();
     $('a[data-toggle="popover"]').popover();
 
     // Fix widths of table cells so that when thead becomes "position: fixed;"
