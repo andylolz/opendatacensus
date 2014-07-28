@@ -81,32 +81,20 @@
         {% endif %}
       </th>
     {% for dataset in datasets %}
-    {% set record = byplace[place.id].datasets[dataset.id] %}
-    <td
-      class="
-      ycount-{{record.ycount}}
-      showpopover
-      "
-      data-dataset="{{record.dataset}}"
-      data-datasetTitle="{{dataset.title}}"
-      >
-        {% if record %}
+      {% set record = byplace[place.id].datasets[dataset.id] %}
+      {% if record %}
+      <td class="showpopover" data-dataset="{{record.dataset}}" data-datasetTitle="{{dataset.title}}">
         <ul class="availability icons mini">
           {% for qu in scoredQuestions %}
             {% set state = record[qu.id] %}
-            <li class="{% if state == 'Y' %}yes{% elif state == 'N' %}no{% elif state == '?' %}maybe{% endif %}" data-toggle="tooltip" title="{{ qu.question }}">
-              <i class="icon-{{ qu.icon }}"></i>
-              <span class="text">{{ state }}</span>
-            </li>
+            <li class="{% if state == 'Y' %}yes{% elif state == 'N' %}no{% elif state == '?' %}maybe{% endif %}" data-toggle="tooltip" title="{{ qu.question }}"></li>
           {% endfor %}
         </ul>
-        {% else %}
-        <a href="/submit/?dataset={{dataset.id}}&place={{place.id}}" class="btn btn-mini">
-          <i class="icon-plus"></i>
-          Add
-        </a>
-        {% endif %}
-    </td>
+      {% else %}
+      <td>
+        <a href="/submit/?dataset={{dataset.id}}&place={{place.id}}" class="btn btn-mini"><i class="icon-plus"></i> Add</a>
+      {% endif %}
+      </td>
     {% endfor %}
     <td class="placescore" data-score="{{placeScore}}"><span>{{placeScore}}</span></td>
   </tr>
